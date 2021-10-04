@@ -5,8 +5,28 @@ import ChatIcon from "@mui/icons-material/Chat";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { SearchOutlined } from "@mui/icons-material";
 import SidebarChat from "./SidebarChat";
+import { useState, useEffect } from "react";
+import db from "../firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const Sidebar = () => {
+  const [rooms, setRooms] = useState([]);
+
+  const getRooms = async () => {
+    await getDocs(collection(db, "rooms")).then((snapshot) => {
+      setRooms(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  };
+
+  useEffect(() => {
+    getRooms();
+  }, []);
+
   return (
     <section className="sidebar">
       <div className="sidebar__header">
@@ -30,9 +50,10 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="sidebar__chats">
-        <SidebarChat />
-        <SidebarChat />
-        <SidebarChat />
+        <SidebarChat addNewChat />
+        {rooms.map((room) => (
+          <SidebarChat key={room.id} id={room.id} name={room.data.name} />
+        ))}
       </div>
     </section>
   );

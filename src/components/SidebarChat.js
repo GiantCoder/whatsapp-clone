@@ -1,8 +1,11 @@
 import { Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import db from "../firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 
-const SidebarChat = ({ addNewChat }) => {
+const SidebarChat = ({ id, name, addNewChat }) => {
   const [seed, setSeed] = useState("");
+  const roomsRef = collection(db, "rooms");
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 999));
@@ -11,7 +14,7 @@ const SidebarChat = ({ addNewChat }) => {
   const createChat = (chat) => {
     const roomName = prompt("Please enter a room for chat");
     if (roomName) {
-      // DB stuff...
+      setDoc(doc(roomsRef), { name: roomName });
     }
   };
 
@@ -19,7 +22,7 @@ const SidebarChat = ({ addNewChat }) => {
     <div className="sidebarChat">
       <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
       <div className="sidebarChat__info">
-        <h2>Room Name</h2>
+        <h2>{name}</h2>
         <p>Last message...</p>
       </div>
     </div>

@@ -80,3 +80,32 @@
     background-color: var(--chatgreen);
     margin-left: auto;
 }
+
+.chat__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    border-top: 1px solid var(--ltgrey);
+}
+
+.chat__footer > form {
+    flex: 1;
+    display: flex;
+}
+
+.chat__footer input {
+    border-radius: 30px;
+    padding: 10px;
+    border: none;
+    flex: 1;
+}
+
+.chat__footer > form > button {
+    display: none;
+}
+
+.chat__footer > .MuiSvgIcon-root {
+    padding: 10px;
+    color: var(--mdgrey);
+}
