@@ -8,9 +8,11 @@ import SidebarChat from "./SidebarChat";
 import { useState, useEffect } from "react";
 import db from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { useStateValue } from "../StateProvider";
 
 const Sidebar = () => {
   const [rooms, setRooms] = useState([]);
+  const [{ user }, dispatch] = useStateValue();
 
   const getRooms = async () => {
     await getDocs(collection(db, "rooms")).then((snapshot) => {
@@ -30,7 +32,7 @@ const Sidebar = () => {
   return (
     <section className="sidebar">
       <div className="sidebar__header">
-        <Avatar />
+        <Avatar src={user?.photoURL} />
         <div className="sidebar__headerRight">
           <IconButton>
             <DonutLargeIcon />
