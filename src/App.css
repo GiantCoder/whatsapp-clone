@@ -1,6 +1,9 @@
 :root {
+    --btwhite: #fff;
     --white: #ededed;
-    --grey: #dadbd3;
+    --ltgrey: #f6f6f6;
+    --mdgrey: #dadbd3;
+    --dkgrey: #989898;
 }
 
 * {
