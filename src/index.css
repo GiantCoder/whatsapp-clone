@@ -1,6 +1,7 @@
+@import url('./components/Chat.css');
 @import url('./components/Sidebar.css');
 @import url('./components/SidebarChat.css');
-@import url('./components/Chat.css');
+@import url('./components/Login.css');
 
 body {
   margin: 0;
